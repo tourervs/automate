@@ -1,0 +1,27 @@
+#!/usr/bin/python
+#Searching strings from one file in second file
+#usage: ./this_script.py one_file.txt second_file.txt
+import sys
+try:
+    one=str(sys.argv[1])
+except:
+    print "ERROR: first argument missing "
+    exit()
+try:
+    two=str(sys.argv[2])
+except:
+    print "ERROR: second argument missing "
+    exit()
+one_file=open(one,"r")
+for field in one_file.readlines():
+    field=field.replace("\n","")
+    second_file=open(two,"r")
+    state=0
+    for field2 in second_file.readlines():
+        field2=field2.replace("\n","")
+        if(field==field2):
+            print "+ %s: %s %s: %s"%(one,field,two,field)
+            state=1
+        second_file.close()
+    if(state==0):
+        print "- %s: %s"%(one,field)
